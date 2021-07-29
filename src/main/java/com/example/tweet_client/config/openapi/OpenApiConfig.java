@@ -1,4 +1,4 @@
-package com.example.tweet_client.config;
+package com.example.tweet_client.config.openapi;
 
 
 import io.swagger.v3.oas.models.ExternalDocumentation;
