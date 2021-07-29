@@ -7,8 +7,8 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class TwitterService {
@@ -16,10 +16,8 @@ public class TwitterService {
     @Autowired
     TwitterConfiguration twitterConfiguration;
 
-    public List<String> getTweets() throws TwitterException {
+    public List<Status> getTimeLine() throws TwitterException {
         Twitter twitter = twitterConfiguration.getInstance();
-        return twitter.getHomeTimeline().stream()
-                .map(Status::getText)
-                .collect(Collectors.toList());
+        return new ArrayList<>(twitter.getHomeTimeline());
     }
 }

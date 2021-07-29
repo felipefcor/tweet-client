@@ -10,7 +10,8 @@ public class Tweet {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
-
+    @Column(name = "tweet_id")
+    private Long tweetId;
     @Column(name = "user")
     private String user;
     @Column(name = "text")
@@ -18,9 +19,10 @@ public class Tweet {
     @Column(name = "location")
     private String location;
     @Column(name = "validation")
-    private String validation;
+    private Boolean validation;
 
-    public Tweet(String user, String text, String location, String validation) {
+    public Tweet(Long tweetId, String user, String text, String location, Boolean validation) {
+        this.tweetId = tweetId;
         this.user = user;
         this.text = text;
         this.location = location;
@@ -51,11 +53,19 @@ public class Tweet {
         this.location = location;
     }
 
-    public String getValidation() {
+    public Boolean getValidation() {
         return validation;
     }
 
-    public void setValidation(String validation) {
+    public void setValidation(Boolean validation) {
         this.validation = validation;
+    }
+
+    public Long getTweetId() {
+        return tweetId;
+    }
+
+    public void setTweetId(Long tweetId) {
+        this.tweetId = tweetId;
     }
 }
