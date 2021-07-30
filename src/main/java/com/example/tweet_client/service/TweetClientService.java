@@ -59,6 +59,11 @@ public class TweetClientService implements TweetClientServiceInterface{
         }
     }
 
+    @Override
+    public List<Tweet> findAllValidate() {
+        return tweetClientRepository.findByValidation(true);
+    }
+
     private boolean existLocation(Place place) {
         return place != null;
     }

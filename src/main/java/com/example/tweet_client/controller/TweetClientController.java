@@ -36,4 +36,10 @@ public class TweetClientController {
         Tweet tweet = tweetClientServiceInterface.validateById(id);
         return new ResponseEntity<>(tweet, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/tweet/validate")
+    public ResponseEntity<List<Tweet>> findAllValidate() throws TwitterException {
+        List<Tweet> listTweets = tweetClientServiceInterface.findAllValidate();
+        return new ResponseEntity<>(listTweets, HttpStatus.OK);
+    }
 }
