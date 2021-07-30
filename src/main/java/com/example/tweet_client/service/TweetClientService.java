@@ -22,7 +22,7 @@ public class TweetClientService implements TweetClientServiceInterface{
     TwitterService twitterService;
 
     @Override
-    public List<Tweet> findAll() throws TwitterException {
+    public List<Tweet> findAllInSeveralLanguagesAndUserBeyond1500followers() throws TwitterException {
 
         List<Status> timeline = twitterService.getTimeLine();
         return timeline.stream()
