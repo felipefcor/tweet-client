@@ -29,9 +29,9 @@ public class TweetClientService implements TweetClientServiceInterface{
                 .filter(status -> status.getUser().getFollowersCount() > 1500)
                 .filter(status -> status.getLang().equals("en") || status.getLang().equals("es") ||
                                   status.getLang().equals("it") || status.getLang().equals("fr"))
-                .map(status -> new Tweet(status.getId(), status.getUser().getName(),
+                .map(status -> tweetClientRepository.save(new Tweet(status.getId(), status.getUser().getName(),
                      status.getText(), existLocation(status.getPlace()) ?
-                        status.getPlace().getFullName() : null, false))
+                        status.getPlace().getFullName() : null, false)))
                 .collect(Collectors.toList());
     }
 

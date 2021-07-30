@@ -14,7 +14,7 @@ public class Tweet {
     private Long tweetId;
     @Column(name = "user")
     private String user;
-    @Column(name = "text")
+    @Column(name = "text", length = 1024)
     private String text;
     @Column(name = "location")
     private String location;
