@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import twitter4j.TwitterException;
 
@@ -27,6 +28,12 @@ public class TweetClientController {
     @GetMapping(value = "/tweet/{id}")
     public ResponseEntity<Tweet> findById(@PathVariable Long id) {
         Tweet tweet = tweetClientServiceInterface.findById(id);
+        return new ResponseEntity<>(tweet, HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/tweet/{id}")
+    public ResponseEntity<Tweet> validateById(@PathVariable Long id) {
+        Tweet tweet = tweetClientServiceInterface.validateById(id);
         return new ResponseEntity<>(tweet, HttpStatus.OK);
     }
 }

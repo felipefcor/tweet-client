@@ -47,6 +47,18 @@ public class TweetClientService implements TweetClientServiceInterface{
         }
     }
 
+    @Override
+    public Tweet validateById(Long id) {
+        Optional<Tweet> tweetOptional =  tweetClientRepository.findById(id);
+        if(tweetOptional.isEmpty()) {
+            throw new TweetNotFound();
+        } else {
+            tweetOptional.get().setValidation(tweetOptional.get().getValidation().equals(Boolean.FALSE));
+            tweetClientRepository.save(tweetOptional.get());
+            return tweetOptional.get();
+        }
+    }
+
     private boolean existLocation(Place place) {
         return place != null;
     }
