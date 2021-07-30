@@ -1,5 +1,6 @@
 package com.example.tweet_client.service;
 
+import com.example.tweet_client.exception.TweetNotFound;
 import com.example.tweet_client.model.Tweet;
 import com.example.tweet_client.repository.TweetClientRepository;
 import com.example.tweet_client.twitter.TwitterService;
@@ -10,6 +11,7 @@ import twitter4j.Status;
 import twitter4j.TwitterException;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,10 +31,20 @@ public class TweetClientService implements TweetClientServiceInterface{
                 .filter(status -> status.getUser().getFollowersCount() > 1500)
                 .filter(status -> status.getLang().equals("en") || status.getLang().equals("es") ||
                                   status.getLang().equals("it") || status.getLang().equals("fr"))
-                .map(status -> tweetClientRepository.save(new Tweet(status.getId(), status.getUser().getName(),
+                .map(status -> tweetClientRepository.save(new Tweet(status.getUser().getName(),
                      status.getText(), existLocation(status.getPlace()) ?
                         status.getPlace().getFullName() : null, false)))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Tweet findById(Long id) {
+        Optional<Tweet> tweetOptional =  tweetClientRepository.findById(id);
+        if(tweetOptional.isEmpty()) {
+            throw new TweetNotFound();
+        } else {
+            return tweetOptional.get();
+        }
     }
 
     private boolean existLocation(Place place) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import twitter4j.TwitterException;
 
@@ -21,5 +22,11 @@ public class TweetClientController {
     public ResponseEntity<List<Tweet>> findAll() throws TwitterException {
         List<Tweet> listTweets = tweetClientServiceInterface.findAllInSeveralLanguagesAndUserBeyond1500followers();
         return new ResponseEntity<>(listTweets, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/tweet/{id}")
+    public ResponseEntity<Tweet> findById(@PathVariable Long id) {
+        Tweet tweet = tweetClientServiceInterface.findById(id);
+        return new ResponseEntity<>(tweet, HttpStatus.OK);
     }
 }
