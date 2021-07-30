@@ -17,7 +17,7 @@ public class TweetClientController {
     @Autowired
     TweetClientServiceInterface tweetClientServiceInterface;
 
-    @GetMapping(value = "/tweets")
+    @GetMapping(value = "/tweet")
     public ResponseEntity<List<Tweet>> findAll() throws TwitterException {
         List<Tweet> listTweets = tweetClientServiceInterface.findAllInSeveralLanguagesAndUserBeyond1500followers();
         return new ResponseEntity<>(listTweets, HttpStatus.OK);
