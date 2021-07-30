@@ -6,10 +6,9 @@ import com.example.tweet_client.repository.TweetClientRepository;
 import com.example.tweet_client.twitter.TwitterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import twitter4j.Place;
-import twitter4j.Status;
-import twitter4j.TwitterException;
+import twitter4j.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,6 +61,15 @@ public class TweetClientService implements TweetClientServiceInterface{
     @Override
     public List<Tweet> findAllValidate() {
         return tweetClientRepository.findByValidation(true);
+    }
+
+    @Override
+    public List<String> findTrends() throws TwitterException {
+        Trends trends = twitterService.getTrends();
+        return Arrays.stream(trends.getTrends())
+                .limit(10)
+                .map(Trend::getName)
+                .collect(Collectors.toList());
     }
 
     private boolean existLocation(Place place) {

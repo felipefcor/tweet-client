@@ -10,4 +10,5 @@ public interface TweetClientServiceInterface {
     Tweet findById(Long id);
     Tweet validateById(Long id);
     List<Tweet> findAllValidate();
+    List<String> findTrends() throws TwitterException;
 }

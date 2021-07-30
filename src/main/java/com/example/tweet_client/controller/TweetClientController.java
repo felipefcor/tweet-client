@@ -38,8 +38,14 @@ public class TweetClientController {
     }
 
     @GetMapping(value = "/tweet/validate")
-    public ResponseEntity<List<Tweet>> findAllValidate() throws TwitterException {
+    public ResponseEntity<List<Tweet>> findAllValidate() {
         List<Tweet> listTweets = tweetClientServiceInterface.findAllValidate();
+        return new ResponseEntity<>(listTweets, HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/tweet/trends")
+    public ResponseEntity<List<String>> findTrends() throws TwitterException {
+        List<String> listTweets = tweetClientServiceInterface.findTrends();
         return new ResponseEntity<>(listTweets, HttpStatus.OK);
     }
 }
