@@ -2,7 +2,7 @@
 
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
-Api to manage Superheros made with [Spring Boot](http://projects.spring.io/spring-boot/).
+Api to manage Tweets made with [Spring Boot](http://projects.spring.io/spring-boot/).
 
 ## Requirements
 
