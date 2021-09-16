@@ -14,10 +14,4 @@ spring:
     password: 1234
 
 
-twitter4j:
-  oauth:
-    key: VRB0Pl6j8FWiA7SVeIj6bihk3
-    secret-key: dAnMilkS8sMsHDlCaSmcHLSB7eBl4OVoUY3oxJkXbl4pTE0Hp8
-    access-token: 939234766402084864-t3kdntzvdKJpu8fRZNTP3MYqiRXzeOe
-    access-token-secret: U8xltvXKQOko5WWNKrOFsT3TwlHho0vJWnX7NCXfL7Rzb
 
