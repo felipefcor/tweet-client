@@ -12,6 +12,8 @@ public class Tweet {
     private Long id;
     @Column(name = "user")
     private String user;
+    @Column(name = "pic", length = 4024)
+    private String pic;
     @Column(name = "text", length = 1024)
     private String text;
     @Column(name = "location")
@@ -19,9 +21,10 @@ public class Tweet {
     @Column(name = "validation")
     private Boolean validation;
 
-    public Tweet(String user, String text, String location, Boolean validation) {
+    public Tweet(String user,  String text, String pic, String location, Boolean validation) {
         this.user = user;
         this.text = text;
+        this.pic = pic;
         this.location = location;
         this.validation = validation;
     }
@@ -67,5 +70,13 @@ public class Tweet {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
     }
 }

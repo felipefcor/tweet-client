@@ -14,4 +14,11 @@ public class CustomExceptionHandler {
     @ExceptionHandler(TweetNotFound.class)
     public void handleTweetNotFound(TweetNotFound exception) {
     }
+
+    @ResponseStatus(
+            value = HttpStatus.NO_CONTENT,
+            reason = "Tweet not found")
+    @ExceptionHandler(TimelineNotAvailable.class)
+    public void handleTimelineNotAvailable(TimelineNotAvailable exception) {
+    }
 }

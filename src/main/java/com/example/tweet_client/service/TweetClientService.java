@@ -1,5 +1,6 @@
 package com.example.tweet_client.service;
 
+import com.example.tweet_client.exception.TimelineNotAvailable;
 import com.example.tweet_client.exception.TweetNotFound;
 import com.example.tweet_client.model.Tweet;
 import com.example.tweet_client.repository.TweetClientRepository;
@@ -27,13 +28,35 @@ public class TweetClientService implements TweetClientServiceInterface{
 
         List<Status> timeline = twitterService.getTimeLine();
         return timeline.stream()
-                .filter(status -> status.getUser().getFollowersCount() > 1500)
-                .filter(status -> status.getLang().equals("en") || status.getLang().equals("es") ||
-                                  status.getLang().equals("it") || status.getLang().equals("fr"))
-                .map(status -> tweetClientRepository.save(new Tweet(status.getUser().getName(),
-                     status.getText(), existLocation(status.getPlace()) ?
-                        status.getPlace().getFullName() : null, false)))
+                .map(status -> tweetClientRepository.save(
+                        new Tweet(
+                                status.getUser().getName(),
+                                status.getText(),
+                                status.getUser().getBiggerProfileImageURL(),
+                                existLocation(status.getPlace()) ?
+                                status.getPlace().getFullName() : null, false)))
                 .collect(Collectors.toList());
+    }
+
+
+    @Override
+    public List<Tweet> findAll()  {
+        List<Status> timeline;
+        try {
+            timeline = twitterService.getTimeLine();
+        } catch (TwitterException twitterException){
+            throw new TimelineNotAvailable();
+        }
+        return timeline.stream()
+                .map(status -> tweetClientRepository.save(
+                        new Tweet(
+                                status.getUser().getName(),
+                                status.getText(),
+                                status.getUser().getBiggerProfileImageURL(),
+                                existLocation(status.getPlace()) ?
+                                        status.getPlace().getFullName() : null, false)))
+                .collect(Collectors.toList());
+
     }
 
     @Override

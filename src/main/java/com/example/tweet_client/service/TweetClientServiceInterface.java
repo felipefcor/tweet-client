@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface TweetClientServiceInterface {
     List<Tweet> findAllInSeveralLanguagesAndUserBeyond1500followers() throws TwitterException;
+    List<Tweet> findAll() throws TwitterException;
     Tweet findById(Long id);
     Tweet validateById(Long id);
     List<Tweet> findAllValidate();
